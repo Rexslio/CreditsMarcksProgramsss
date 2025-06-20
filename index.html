@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>b, tulipan</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="particles"></canvas>
+        <div class="container">
+        <div class="glass">
+            <div class="shine"></div>
+        </div>
+        <div class="thorns">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="leaves">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="petals">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="deadPetals">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <div>
+        <h4 class="texto"> you </h>
+    </div>
+     <canvas id="particles"></canvas> 
+     <h1></h1>
+</body>
+<link rel="stylesheet" href="script.js">
+<script>
+  const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    for (let i = 0; i < 120; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        r: Math.random() * 3 + 1,
+        dx: (Math.random() - 0.5) * 0.5,
+        dy: (Math.random() - 0.5) * 0.5
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = '#ffffff';
+      for (const p of particles) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        p.x += p.dx;
+        p.y += p.dy;
+
+        if (p.x < 0 || p.x > width) p.dx *= -1;
+        if (p.y < 0 || p.y > height) p.dy *= -1;
+      }
+      requestAnimationFrame(draw);
+    }
+
+    draw();</script>
+</body>
+</html>
